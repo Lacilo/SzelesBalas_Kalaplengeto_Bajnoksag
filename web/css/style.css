@@ -1,0 +1,193 @@
+/* Alapbeállítások */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Navigáció */
+nav {
+    background-color: #ffdd57;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #fff176;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+/* Kártyák konténer */
+.kartyak-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+/* Egy kártya stílusa */
+.kepblokk {
+    display: flex;
+    flex-direction: column; /* kép felül, szöveg alul */
+    align-items: center;
+    width: 220px;           /* kisebb szélesség */
+    text-align: center;
+}
+
+.kepblokk img {
+    width: 100%;
+    height: 200px;          /* kisebb magasság */
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kepblokk img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.caption {
+    width: 100%;             /* ugyanakkora, mint a kép */
+    background-color: #fff9d9;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    padding: 12px;
+    margin-top: 5px;         /* közvetlenül a kép alatt */
+}
+
+.caption h2 {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.caption p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Versenytáblázat */
+.verseny-tabla {
+    width: 95%;              /* nagyobb szélesség */
+    max-width: 1200px;       /* nagyobb max-width */
+    border-collapse: collapse;
+    margin: 40px 0;
+    font-size: 1rem;         /* nagyobb betűméret */
+}
+
+.verseny-tabla th, .verseny-tabla td {
+    border: 1px solid #ccc;
+    padding: 12px 15px;      /* nagyobb cella */
+    text-align: center;
+}
+
+.verseny-tabla th {
+    background-color: #ffdd57;
+    font-weight: bold;
+}
+
+.verseny-tabla tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Reszponzív design */
+@media (max-width: 768px) {
+    .kartyak-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .kepblokk {
+        width: 90%;
+    }
+
+    .verseny-tabla {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+}
+
+
+/* Táblázat scrollozható konténerrel */
+.verseny-tabla-wrapper {
+    width: 95%;
+    max-width: 1400px;        /* még nagyobb, mint eddig */
+    overflow-x: auto;          /* vízszintes scroll */
+    overflow-y: auto;          /* függőleges scroll, ha kell */
+    margin: 40px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Versenytáblázat */
+.verseny-tabla {
+    width: 100%;
+    min-width: 1200px;         /* ha sok oszlop van, ne törjön meg */
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.verseny-tabla th, .verseny-tabla td {
+    border: 1px solid #ccc;
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.verseny-tabla th {
+    background-color: #ffdd57;
+    font-weight: bold;
+}
+
+.verseny-tabla tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Reszponzív */
+@media (max-width: 768px) {
+    .verseny-tabla-wrapper {
+        width: 100%;
+    }
+    
+    .verseny-tabla {
+        font-size: 0.9rem;
+    }
+}
