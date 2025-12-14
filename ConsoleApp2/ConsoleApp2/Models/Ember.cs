@@ -19,7 +19,7 @@ namespace ConsoleApp2.Models
         float idoL;
         int pontL;
 
-        public Ember(int id, string nev, int pont1, float ido1, int pont2, float ido2, int pont3, float ido3, float idoL, int pontL)
+        public Ember(int id, string nev, int pont1, float ido1, int pont2, float ido2, int pont3, float ido3, float idoL = 0, int pontL = 0)
         {
             this.id = id;
             this.nev = nev;
