@@ -12,10 +12,9 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             List<Ember> embers = AdatB.ReadAllUsers();
-            int sorDisplay = 0;
             int sor = 0;
             
-            Ui.DisplayAllEmber(embers, 3, sorDisplay);
+            Ui.DisplayAllEmber(embers, 3, sor * 2);
 
             ConsoleKeyInfo keyInfo;
 
@@ -26,18 +25,29 @@ namespace ConsoleApp2
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        sorDisplay -= 2;
                         sor -= 1;
                         break;
-                    case ConsoleKey.DownArrow:                        
-                        sorDisplay += 2;
+                    case ConsoleKey.DownArrow:
                         sor += 1;
+                        break;
+                    case ConsoleKey.A:
+                        break;
+                    case ConsoleKey.E:
+                        break;
+                    case ConsoleKey.D:
+                        AdatB.DeleteUser(embers[sor].Id);
+                        sor = 0;
+                        embers = AdatB.ReadAllUsers();
                         break;
                 }
 
-                Ui.DisplayAllEmber(embers, 3, sorDisplay);
-                Console.WriteLine(sorDisplay);
-                Console.WriteLine(embers[sor].Id);
+                Ui.DisplayAllEmber(embers, 3, sor * 2);
+
+                Console.WriteLine("a: Hozzáadás, e: Szerkesztés, d: törlés");
+
+
+                //Console.WriteLine(sor);
+                //Console.WriteLine(embers[sor].Id);
             }
         }
 
