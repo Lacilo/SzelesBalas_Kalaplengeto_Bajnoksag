@@ -60,7 +60,6 @@ namespace ConsoleApp2
 
                 Console.WriteLine("a: Hozzáadás, e: Szerkesztés, d: Törlés");
 
-
                 //Console.WriteLine(sor);
                 //Console.WriteLine(emberek[sor].Id);
             }
