@@ -107,6 +107,49 @@ namespace ConsoleApp2.Models
             connection.Close();
         }
 
+        public static void WriteToHtml()
+        {
+            List<Ember> emberek = ReadAllUsers();
+
+            string path = @"..\..\..\..\..\web\tablazat.html";
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                sw.WriteLine("<table>");
+
+                // FEJLÉC
+                sw.WriteLine("<thead>");
+                sw.WriteLine("<tr>");
+                sw.WriteLine("<th>#</th>");
+                sw.WriteLine("<th>ID</th>");
+                sw.WriteLine("<th>Név</th>");
+                sw.WriteLine("<th>Pont 1</th>");
+                sw.WriteLine("<th>Idő 1</th>");
+                sw.WriteLine("<th>Pont 2</th>");
+                sw.WriteLine("<th>Idő 2</th>");
+                sw.WriteLine("<th>Pont 3</th>");
+                sw.WriteLine("<th>Idő 3</th>");
+                sw.WriteLine("<th>Összpont</th>");
+                sw.WriteLine("<th>Összidő</th>");
+                sw.WriteLine("</tr>");
+                sw.WriteLine("</thead>");
+
+                int szaml = 0;
+
+                // TARTALOM
+                sw.WriteLine("<tbody>");
+
+                foreach (Ember ember in emberek)
+                {
+                    szaml++;
+                    sw.WriteLine($"<tr><td>{szaml}.</td><td>{ember.Id}</td><td>{ember.Nev}</td><td>{ember.Pont1}</td><td>{ember.Ido1}</td><td>{ember.Pont2}</td><td>{ember.Ido2}</td><td>{ember.Pont3}</td><td>{ember.Ido3}</td><td>{ember.PontL}</td><td>{ember.IdoL}</td></tr>");
+                }
+
+                sw.WriteLine("</tbody>");
+                sw.WriteLine("</table>");
+            }
+        }
+
         public static List<Ember> ReadAllUsers()
         {
             MySqlConnection connection = StartConnection();

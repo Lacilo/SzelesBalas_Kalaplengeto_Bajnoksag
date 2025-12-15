@@ -3,6 +3,7 @@ using ConsoleApp2.Models;
 using System.Data.SqlClient;
 using System.Data;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace ConsoleApp2
 {
@@ -10,10 +11,7 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            List<Ember> emberek = AdatB.ReadAllUsers();  
-            List<Ember> sortedEmber = SortEmberList(emberek);
-            
-            Ui.DisplayAllEmber(sortedEmber, 3, 5);
+            AdatB.WriteToHtml();
         }
 
         static Ember FindMaxEmber(List<Ember> emberek)
