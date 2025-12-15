@@ -9,7 +9,9 @@ namespace ConsoleApp2.Models
     internal class Ui
     {
         public static void DisplayAllEmber(List<Ember> emberek, int rSor = 3, int aktivSor = 1) 
-        {     
+        {
+            Console.Clear();
+
             Console.WriteLine("┌────┬──────────┬─────────────────────────┬─────────────┬─────────────┬─────────────┬──────────────┬─────────────┐");
             Console.WriteLine("│ Id │ Helyezés │ Teljes neve az embernek │ 1. Eredmény │ 2. Eredmény │ 3. Eredmény │ Legjobb pont │ Legjobb idő │");
             Console.WriteLine("├────┼──────────┼─────────────────────────┼─────────────┼─────────────┼─────────────┼──────────────┼─────────────┤");
@@ -25,7 +27,7 @@ namespace ConsoleApp2.Models
                 //Console.Write("├────┼──────────┼─────────────────────────┼───────┼───────┼───────┼───────┼──────┤\n");
                 Console.Write($"│ ");
 
-                if (aktivSor + 2 == rSor)
+                if (aktivSor + 3 == rSor)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;

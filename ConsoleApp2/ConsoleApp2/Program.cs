@@ -11,7 +11,34 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            AdatB.WriteToHtml();
+            List<Ember> embers = AdatB.ReadAllUsers();
+            int sorDisplay = 0;
+            int sor = 0;
+            
+            Ui.DisplayAllEmber(embers, 3, sorDisplay);
+
+            ConsoleKeyInfo keyInfo;
+
+            while (true)
+            {
+                keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        sorDisplay -= 2;
+                        sor -= 1;
+                        break;
+                    case ConsoleKey.DownArrow:                        
+                        sorDisplay += 2;
+                        sor += 1;
+                        break;
+                }
+
+                Ui.DisplayAllEmber(embers, 3, sorDisplay);
+                Console.WriteLine(sorDisplay);
+                Console.WriteLine(embers[sor].Id);
+            }
         }
 
         static Ember FindMaxEmber(List<Ember> emberek)

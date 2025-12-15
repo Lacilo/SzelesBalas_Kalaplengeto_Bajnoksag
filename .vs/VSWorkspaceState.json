@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ConsoleApp2"
+    "\\ConsoleApp2",
+    "\\ConsoleApp2\\ConsoleApp2",
+    "\\ConsoleApp2\\ConsoleApp2\\Models"
   ],
-  "SelectedNode": "\\ConsoleApp2\\ConsoleApp2.sln",
+  "SelectedNode": "\\ConsoleApp2\\ConsoleApp2\\Models\\AdatB.cs",
   "PreviewInSolutionExplorer": false
 }
