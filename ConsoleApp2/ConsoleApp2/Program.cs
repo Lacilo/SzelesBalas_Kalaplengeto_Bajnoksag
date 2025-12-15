@@ -11,10 +11,10 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            List<Ember> embers = AdatB.ReadAllUsers();
+            List<Ember> emberek = AdatB.ReadAllUsers();
             int sor = 0;
             
-            Ui.DisplayAllEmber(embers, 3, sor * 2);
+            Ui.DisplayAllEmber(emberek, 3, sor * 2);
 
             ConsoleKeyInfo keyInfo;
 
@@ -31,23 +31,38 @@ namespace ConsoleApp2
                         sor += 1;
                         break;
                     case ConsoleKey.A:
+                        Console.Write("Vesszővel (,) elválasztva adja meg a játékos adatait --> ");
+
+                        string inpNew = Console.ReadLine();
+                        string[] adat = inpNew.Split(',');
+
+                        Ember ujEmber = new Ember(int.Parse(adat[0]), adat[1], int.Parse(adat[2]), int.Parse(adat[3]), int.Parse(adat[4]), int.Parse(adat[5]), int.Parse(adat[6]), int.Parse(adat[7]), int.Parse(adat[8]));
+                        AdatB.InsertUser(ujEmber);
+
+                        emberek = AdatB.ReadAllUsers();
                         break;
                     case ConsoleKey.E:
+                        Console.Write("Adja meg a módosítani kívánt adat nevét és az új értékét vesszővel (,) elválasztva --> ");
+                        string inpEdit = Console.ReadLine();
+                        string[] data = inpEdit.Split(',');
+
+                        AdatB.UpdateUserData(emberek[sor].Id, data[0], data[1]);
+                        emberek = AdatB.ReadAllUsers();
                         break;
                     case ConsoleKey.D:
-                        AdatB.DeleteUser(embers[sor].Id);
+                        AdatB.DeleteUser(emberek[sor].Id);
                         sor = 0;
-                        embers = AdatB.ReadAllUsers();
+                        emberek = AdatB.ReadAllUsers();
                         break;
                 }
 
-                Ui.DisplayAllEmber(embers, 3, sor * 2);
+                Ui.DisplayAllEmber(emberek, 3, sor * 2);
 
-                Console.WriteLine("a: Hozzáadás, e: Szerkesztés, d: törlés");
+                Console.WriteLine("a: Hozzáadás, e: Szerkesztés, d: Törlés");
 
 
                 //Console.WriteLine(sor);
-                //Console.WriteLine(embers[sor].Id);
+                //Console.WriteLine(emberek[sor].Id);
             }
         }
 
