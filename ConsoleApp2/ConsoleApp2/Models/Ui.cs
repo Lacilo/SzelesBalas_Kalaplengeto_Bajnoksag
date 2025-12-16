@@ -13,10 +13,6 @@ namespace ConsoleApp2.Models
         {
             Console.Clear();
 
-            Console.WriteLine("┌────┬──────────┬─────────────────────────┬─────────────┬─────────────┬─────────────┬──────────────┬─────────────┐");
-            Console.WriteLine("│ Id │ Helyezés │ Teljes neve az embernek │ 1. Eredmény │ 2. Eredmény │ 3. Eredmény │ Legjobb pont │ Legjobb idő │");
-            Console.WriteLine("├────┼──────────┼─────────────────────────┼─────────────┼─────────────┼─────────────┼──────────────┼─────────────┤");
-
             int maxLapHossz = 0;
 
             if (startIndex + 10 > emberek.Count)
@@ -27,6 +23,10 @@ namespace ConsoleApp2.Models
             {
                 maxLapHossz = startIndex + 10;
             }
+
+            Console.WriteLine("┌────┬──────────┬─────────────────────────┬─────────────┬─────────────┬─────────────┬──────────────┬─────────────┐");
+            Console.WriteLine("│ Id │ Helyezés │ Teljes neve az embernek │ 1. Eredmény │ 2. Eredmény │ 3. Eredmény │ Legjobb pont │ Legjobb idő │");
+            Console.WriteLine("├────┼──────────┼─────────────────────────┼─────────────┼─────────────┼─────────────┼──────────────┼─────────────┤");
 
                 for (int i = startIndex; i < maxLapHossz; i++)
                 {

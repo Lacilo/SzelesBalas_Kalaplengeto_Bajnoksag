@@ -15,9 +15,12 @@ namespace ConsoleApp2
             int sor = 0;
             int sorDisp = 0;
             int sorStart = 0;
-            int lap = 0;
+            int lapSzam = (int) Math.Ceiling(emberek.Count / 10.0);
+            int jLap = 1;
+            int lap = 0;            
             
-            Ui.DisplayAllEmber(emberek, 3, sor * 2);
+            Ui.DisplayAllEmber(emberek, 0, 3, sorDisp);
+            Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissíése | {jLap} / {lapSzam}");
 
             ConsoleKeyInfo keyInfo;
 
@@ -36,14 +39,7 @@ namespace ConsoleApp2
                         sorDisp += 2;
                         break;
                     case ConsoleKey.A:
-                        Console.Write("Vesszővel (,) elválasztva adja meg a játékos adatait --> ");
-
-                        string inpNew = Console.ReadLine();
-                        string[] adat = inpNew.Split(',');
-
-                        Ember ujEmber = new Ember(int.Parse(adat[0]), adat[1], int.Parse(adat[2]), int.Parse(adat[3]), int.Parse(adat[4]), int.Parse(adat[5]), int.Parse(adat[6]), int.Parse(adat[7]), int.Parse(adat[8]));
-                        AdatB.InsertUser(ujEmber);
-                        emberek = SortEmberList(AdatB.ReadAllUsers());
+                        emberek = ReadNewUserData();
                         break;
                     case ConsoleKey.E:
                         emberek = UpdateUserData(emberek, sor);
@@ -64,16 +60,26 @@ namespace ConsoleApp2
                         });
                         break;
                     case ConsoleKey.RightArrow:
-                        lap += 10;
-                        sorStart += 10;
-                        sor = sorStart;
-                        sorDisp = 0;
+                        if (!(jLap + 1 > lapSzam))
+                        {
+                            lap += 10;
+                            jLap++;
+                            sorStart += 10;
+                            sor = sorStart;
+                            sorDisp = 0;
+                        }
+
                         break;
                     case ConsoleKey.LeftArrow:
-                        lap -= 10;
-                        sorStart -= 10;
-                        sor = sorStart;
-                        sorDisp = 0;
+                        if (!(jLap - 1 == 0))
+                        {
+                            lap -= 10;
+                            jLap--;
+                            sorStart -= 10;
+                            sor = sorStart;
+                            sorDisp = 0;
+                        }
+                        
                         break;
                     case ConsoleKey.F:
                         emberek = SortEmberList(AdatB.ReadAllUsers());
@@ -82,12 +88,27 @@ namespace ConsoleApp2
 
                 Ui.DisplayAllEmber(emberek, lap, 3, sorDisp);
 
-                Console.WriteLine("a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissíése");
+                Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissíése | {jLap} / {lapSzam}");
 
                 //Console.WriteLine("megjelenítendő sor: " + sorDisp + "\n");
                 //Console.WriteLine("valódi sor: " + sor);
                 //Console.WriteLine("kiválaszott ember id:" + emberek[sor].Id);
             }
+        }
+
+        private static List<Ember> ReadNewUserData()
+        {
+            List<Ember> emberek;
+            Console.Write("Pontosvesszővel (;) elválasztva adja meg a játékos adatait\nId;Név;1.pont;1.idő;2.pont;2.idő;3.pont;3.ido --> ");
+
+            string inpNew = Console.ReadLine();
+            string[] adat = inpNew.Split(';');
+
+            Ember ujEmber = new Ember(int.Parse(adat[0]), adat[1], int.Parse(adat[2]), float.Parse(adat[3]), int.Parse(adat[4]), float.Parse(adat[5]), int.Parse(adat[6]), float.Parse(adat[7]));
+            AdatB.InsertUser(ujEmber);
+            emberek = SortEmberList(AdatB.ReadAllUsers());
+
+            return emberek;
         }
 
         private static List<Ember> UpdateUserData(List<Ember> emberek, int sor)
@@ -146,6 +167,7 @@ namespace ConsoleApp2
 
             AdatB.UpdateUserData(emberek[sor].Id, attribList[attribIndex, 1], inpEdit, emberek[sor]);
             emberek = SortEmberList(AdatB.ReadAllUsers());
+
             return emberek;
         }
 
