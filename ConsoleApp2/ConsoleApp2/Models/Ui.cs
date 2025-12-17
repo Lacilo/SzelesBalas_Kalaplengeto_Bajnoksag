@@ -57,7 +57,7 @@ namespace ConsoleApp2.Models
                     if (rSor > maxSor) rSor = maxSor;
 
                     Console.SetCursorPosition(5, rSor);
-                    Console.Write($"│    {emberek.IndexOf(ember) + 1}");
+                    Console.Write($"│    {i + 1}");
                     Console.SetCursorPosition(16, rSor);
                     Console.Write($"│ {ember.Nev}");
                     Console.SetCursorPosition(42, rSor);
