@@ -20,7 +20,7 @@ namespace ConsoleApp2
             int lap = 0;            
             
             Ui.DisplayAllEmber(emberek, 0, 3, sorDisp);
-            Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissíése | {jLap} / {lapSzam}");
+            Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissítése | {jLap} / {lapSzam}");
 
             ConsoleKeyInfo keyInfo;
 
@@ -40,15 +40,18 @@ namespace ConsoleApp2
                         break;
                     case ConsoleKey.A:
                         emberek = ReadNewUserData();
+                        AdatB.WriteToHtml();
                         break;
                     case ConsoleKey.E:
                         emberek = UpdateUserData(emberek, sor);
+                        AdatB.WriteToHtml();
                         break;
                     case ConsoleKey.D:
                         AdatB.DeleteUser(emberek[sor].Id);
                         sor = 0;
                         sorDisp = 0;
-                        emberek = AdatB.ReadAllUsers();
+                        emberek = SortEmberList(AdatB.ReadAllUsers());
+                        AdatB.WriteToHtml();
                         break;
                     case ConsoleKey.W:
                         AdatB.WriteToHtml();
@@ -91,7 +94,7 @@ namespace ConsoleApp2
 
                 Ui.DisplayAllEmber(emberek, lap, 3, sorDisp);
 
-                Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissíése | {jLap} / {lapSzam}");
+                Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissítése | {jLap} / {lapSzam}");
 
                 //Console.WriteLine("megjelenítendő sor: " + sorDisp + "\n");
                 //Console.WriteLine("valódi sor: " + sor);
