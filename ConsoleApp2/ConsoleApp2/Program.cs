@@ -51,6 +51,9 @@ namespace ConsoleApp2
                         sor = 0;
                         sorDisp = 0;
                         emberek = SortEmberList(AdatB.ReadAllUsers());
+                        lap = 0;
+                        jLap = 1;
+                        sorStart = 0;
                         AdatB.WriteToHtml();
                         break;
                     case ConsoleKey.W:
@@ -96,9 +99,9 @@ namespace ConsoleApp2
 
                 Console.WriteLine($"a: Hozzáadás, e: Szerkesztés, d: Törlés, w: kiírás a weboldalra, s: Weboldal indítása, f: Adatok frissítése | {jLap} / {lapSzam}");
 
-                //Console.WriteLine("megjelenítendő sor: " + sorDisp + "\n");
-                //Console.WriteLine("valódi sor: " + sor);
-                //Console.WriteLine("kiválaszott ember id:" + emberek[sor].Id);
+                Console.WriteLine("megjelenítendő sor: " + sorDisp + "\n");
+                Console.WriteLine("valódi sor: " + sor);
+                Console.WriteLine("kiválaszott ember id:" + emberek[sor].Id);
             }
         }
 
