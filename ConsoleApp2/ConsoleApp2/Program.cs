@@ -47,6 +47,7 @@ namespace ConsoleApp2
                     case ConsoleKey.D:
                         AdatB.DeleteUser(emberek[sor].Id);
                         sor = 0;
+                        sorDisp = 0;
                         emberek = AdatB.ReadAllUsers();
                         break;
                     case ConsoleKey.W:
@@ -85,6 +86,8 @@ namespace ConsoleApp2
                         emberek = SortEmberList(AdatB.ReadAllUsers());
                         break;
                 }
+
+                lapSzam = (int)Math.Ceiling(emberek.Count / 10.0);
 
                 Ui.DisplayAllEmber(emberek, lap, 3, sorDisp);
 
