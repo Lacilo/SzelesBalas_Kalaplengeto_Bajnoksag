@@ -73,7 +73,7 @@ namespace ConsoleApp2.Models
                     Console.SetCursorPosition(113, rSor);
                     Console.Write("│");
 
-                    if (maxLapHossz - 1 == emberek.IndexOf(ember))
+                    if (maxLapHossz - 1 == i)
                     {
                         Console.WriteLine("\n└────┴──────────┴─────────────────────────┴─────────────┴─────────────┴─────────────┴──────────────┴─────────────┘");
                     }

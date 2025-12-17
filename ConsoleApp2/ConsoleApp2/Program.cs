@@ -11,7 +11,7 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            List<Ember> emberek = SortEmberList(AdatB.ReadAllUsers());
+            List<Ember> emberek = AdatB.SortEmberList(AdatB.ReadAllUsers());
             int sor = 0;
             int sorDisp = 0;
             int sorStart = 0;
@@ -31,12 +31,27 @@ namespace ConsoleApp2
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        sor -= 1;
-                        sorDisp -= 2;
+                        if (!(sor - 1 < sorStart))
+                        {
+                            sor -= 1;
+                            sorDisp -= 2;
+                        }                        
                         break;
                     case ConsoleKey.DownArrow:
                         sor += 1;
                         sorDisp += 2;
+
+                        if (sor > sorStart + 9)
+                        {
+                            sor = sorStart + 9;
+                            sorDisp -= 2;
+                        }
+
+                        if (sor >= emberek.Count) 
+                        { 
+                            sor = emberek.Count - 1; 
+                            sorDisp -= 2;
+                        }
                         break;
                     case ConsoleKey.A:
                         emberek = ReadNewUserData();
@@ -50,7 +65,7 @@ namespace ConsoleApp2
                         AdatB.DeleteUser(emberek[sor].Id);
                         sor = 0;
                         sorDisp = 0;
-                        emberek = SortEmberList(AdatB.ReadAllUsers());
+                        emberek = AdatB.SortEmberList(AdatB.ReadAllUsers());
                         lap = 0;
                         jLap = 1;
                         sorStart = 0;
@@ -89,7 +104,7 @@ namespace ConsoleApp2
                         
                         break;
                     case ConsoleKey.F:
-                        emberek = SortEmberList(AdatB.ReadAllUsers());
+                        emberek = AdatB.SortEmberList(AdatB.ReadAllUsers());
                         break;
                 }
 
@@ -115,7 +130,7 @@ namespace ConsoleApp2
 
             Ember ujEmber = new Ember(int.Parse(adat[0]), adat[1], int.Parse(adat[2]), float.Parse(adat[3]), int.Parse(adat[4]), float.Parse(adat[5]), int.Parse(adat[6]), float.Parse(adat[7]));
             AdatB.InsertUser(ujEmber);
-            emberek = SortEmberList(AdatB.ReadAllUsers());
+            emberek = AdatB.SortEmberList(AdatB.ReadAllUsers());
 
             return emberek;
         }
@@ -176,42 +191,9 @@ namespace ConsoleApp2
             }
 
             AdatB.UpdateUserData(emberek[sor].Id, attribList[attribIndex, 1], inpEdit, emberek[sor]);
-            emberek = SortEmberList(AdatB.ReadAllUsers());
+            emberek = AdatB.SortEmberList(AdatB.ReadAllUsers());
 
             return emberek;
-        }
-
-        static Ember FindMaxEmber(List<Ember> emberek)
-        {
-            Ember MaxEmber = emberek[0];
-
-            foreach (Ember ember in emberek)
-            {
-                if (ember.PontL > MaxEmber.PontL)
-                {
-                    MaxEmber = ember;
-                }
-                else if (ember.PontL == MaxEmber.PontL && ember.IdoL < MaxEmber.IdoL)
-                {
-                    MaxEmber = ember;
-                }                
-            }
-
-            return MaxEmber;
-        }
-        static List<Ember> SortEmberList(List<Ember> emberek)
-        {
-            List<Ember> sortedEmber = new List<Ember> { };
-
-            while (emberek.Count > 0)
-            {
-                Ember jMaxEmber = FindMaxEmber(emberek);
-
-                sortedEmber.Add(jMaxEmber);
-                emberek.Remove(jMaxEmber);
-            }
-
-            return sortedEmber;
         }
     }
 }

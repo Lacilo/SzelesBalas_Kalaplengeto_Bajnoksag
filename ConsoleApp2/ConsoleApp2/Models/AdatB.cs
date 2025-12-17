@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApp2;
 
 namespace ConsoleApp2.Models
 {
@@ -106,10 +107,42 @@ namespace ConsoleApp2.Models
             cmd.ExecuteNonQuery();
             connection.Close();
         }
+        public static Ember FindMaxEmber(List<Ember> emberek)
+        {
+            Ember MaxEmber = emberek[0];
+
+            foreach (Ember ember in emberek)
+            {
+                if (ember.PontL > MaxEmber.PontL)
+                {
+                    MaxEmber = ember;
+                }
+                else if (ember.PontL == MaxEmber.PontL && ember.IdoL < MaxEmber.IdoL)
+                {
+                    MaxEmber = ember;
+                }
+            }
+
+            return MaxEmber;
+        }
+        public static List<Ember> SortEmberList(List<Ember> emberek)
+        {
+            List<Ember> sortedEmber = new List<Ember> { };
+
+            while (emberek.Count > 0)
+            {
+                Ember jMaxEmber = FindMaxEmber(emberek);
+
+                sortedEmber.Add(jMaxEmber);
+                emberek.Remove(jMaxEmber);
+            }
+
+            return sortedEmber;
+        }
 
         public static void WriteToHtml()
         {
-            List<Ember> emberek = ReadAllUsers();
+            List<Ember> emberek = SortEmberList(ReadAllUsers());
 
             string path = @"..\..\..\..\..\web\tablazat.html";
 
