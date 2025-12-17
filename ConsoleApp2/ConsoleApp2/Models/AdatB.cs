@@ -66,23 +66,16 @@ namespace ConsoleApp2.Models
         {
             MySqlConnection connection = StartConnection();
 
-            ember.IdoL = GetMin(ember.Ido1, ember.Ido2, ember.Ido3);
-            ember.PontL = GetMax(ember.Pont1, ember.Pont2, ember.Pont3);
-
             string sql = "UPDATE versenyzok " +
-                         "SET " + attr + " = @newValue, " +
-                         "IdoL = @IdoL, " +
-                         "PontL = @PontL " +
+                         "SET " + attr + " = @newValue " +
                          "WHERE Id = @id";
 
             MySqlCommand cmd = new MySqlCommand(sql, connection);
 
             cmd.Parameters.AddWithValue("@newValue", newValue);
-            cmd.Parameters.AddWithValue("@id", id);       
-            cmd.Parameters.AddWithValue("@IdoL", ember.IdoL);
-            cmd.Parameters.AddWithValue("@PontL", ember.PontL);
+            cmd.Parameters.AddWithValue("@id", id);
 
-            cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();   
 
             connection.Close();
         }
@@ -180,10 +173,11 @@ namespace ConsoleApp2.Models
                     pont2: reader.GetInt32("Pont2"),
                     ido2: reader.GetFloat("Ido2"),
                     pont3: reader.GetInt32("Pont3"),
-                    ido3: reader.GetFloat("Ido3"),
-                    idoL: reader.GetFloat("IdoL"),
-                    pontL: reader.GetInt32("PontL")
+                    ido3: reader.GetFloat("Ido3")
                     );
+
+                user.IdoL = GetMin(user.Ido1, user.Ido2, user.Ido3);
+                user.PontL = GetMax(user.Pont1, user.Pont2, user.Pont3);
 
                 users.Add(user);
             }

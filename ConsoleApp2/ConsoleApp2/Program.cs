@@ -138,6 +138,7 @@ namespace ConsoleApp2
 
             ConsoleKeyInfo keyInfo;
 
+            Console.SetCursorPosition(0, 24);
             Console.Write($"Válassza ki fel le nyilakkal a módosítandó adatot - {attribList[attribIndex, 0]} --> ");
 
             while (inpEdit == "")
