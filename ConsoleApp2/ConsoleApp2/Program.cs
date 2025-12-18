@@ -141,7 +141,7 @@ namespace ConsoleApp2
             //string inpEdit = Console.ReadLine();
             //string[] data = inpEdit.Split(',');
 
-            string[,] attribList = new string[10, 2]
+            string[,] attribList = new string[8, 2]
             {
                 {"Id", "Id" },
                 {"Név", "Nev" },
@@ -150,9 +150,7 @@ namespace ConsoleApp2
                 {"2. pontszám", "Pont2" },
                 {"2. idő", "Ido2" },
                 {"3. pontszám", "Pont3" },
-                {"3. idő", "Ido3" },
-                {"Legjobb idő", "IdoL" },
-                {"Legjobb pontszám", "PontL" }                
+                {"3. idő", "Ido3" }             
             };
 
             string inpEdit = "";
@@ -173,11 +171,11 @@ namespace ConsoleApp2
                 {
                     case ConsoleKey.UpArrow:
                         attribIndex -= 1;
-                        if (attribIndex < 0) attribIndex = 9;
+                        if (attribIndex < 0) attribIndex = 7;
                         break;
                     case ConsoleKey.DownArrow:
                         attribIndex += 1;
-                        if (attribIndex > 9) attribIndex = 0;
+                        if (attribIndex > 7) attribIndex = 0;
                         break;
                     case ConsoleKey.Enter:
                         Console.Write($"Válassza ki fel le nyilakkal a módosítandó adatot - {attribList[attribIndex, 0]} --> ");
