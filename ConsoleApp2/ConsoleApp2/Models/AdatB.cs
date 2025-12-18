@@ -120,6 +120,9 @@ namespace ConsoleApp2.Models
                 else if (ember.PontL == MaxEmber.PontL && ember.IdoL < MaxEmber.IdoL)
                 {
                     MaxEmber = ember;
+                }else if(ember.PontL == MaxEmber.PontL && ember.IdoL == MaxEmber.IdoL && string.Compare(ember.Nev, MaxEmber.Nev, StringComparison.CurrentCulture) < 0)
+                {
+                    MaxEmber = ember;
                 }
             }
 
@@ -191,7 +194,7 @@ namespace ConsoleApp2.Models
             MySqlConnection connection = StartConnection();
 
 
-            string sql = "SELECT * FROM versenyzok";
+            string sql = "SELECT * FROM versenyzok ORDER BY Nev ASC";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             List<Ember> users = new List<Ember>();
             MySqlDataReader reader = cmd.ExecuteReader();
